@@ -1,16 +1,7 @@
 import { Breadcrumbs, Typography, Link } from '@mui/material'
 import { NavigateNext, Home } from '@mui/icons-material'
 import { useLocation, useNavigate } from 'react-router-dom'
-
-const routeNames = {
-  '/dashboard': 'Dashboard',
-  '/hemodinamica': 'Hemodinâmica',
-  '/centro-cirurgico': 'Centro Cirúrgico',
-  '/opme': 'OPME',
-  '/relatorios': 'Relatórios',
-  '/gestao': 'Gestão',
-  '/sistema': 'Sistema',
-}
+import { findMenuItemByRoute } from '../../../constants/menuConfig'
 
 export default function Breadcrumb() {
   const location = useLocation()
@@ -32,7 +23,8 @@ export default function Breadcrumb() {
       </Link>
       {pathnames.map((value, index) => {
         const path = `/${pathnames.slice(0, index + 1).join('/')}`
-        const name = routeNames[path] || value.charAt(0).toUpperCase() + value.slice(1)
+        const menuItem = findMenuItemByRoute(path)
+        const name = menuItem?.name || value.charAt(0).toUpperCase() + value.slice(1)
         const isLast = index === pathnames.length - 1
 
         return isLast ? (

@@ -24,7 +24,7 @@ export default function ChartCard({ title, subtitle, children, height }) {
           </Typography>
         )}
       </Box>
-      <Box sx={{ width: '100%', height: height || 300 }}>
+      <Box sx={{ width: '100%', height: height || 340 }}>
         {children}
       </Box>
     </Box>

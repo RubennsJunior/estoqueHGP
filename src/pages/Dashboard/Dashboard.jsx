@@ -122,7 +122,7 @@ export default function Dashboard() {
       <Grid container spacing={2.5}>
         <Grid item xs={12} md={6}>
           <ChartCard title="Triagens por Setor" subtitle="Quantidade de triagens por setor">
-            <ResponsiveContainer width="100%" height={280}>
+            <ResponsiveContainer width="100%" height={340}>
               <BarChart data={TRIAGENS_POR_SETOR} margin={{ top: 5, right: 5, left: -15, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
                 <XAxis
@@ -140,7 +140,7 @@ export default function Dashboard() {
 
         <Grid item xs={12} md={6}>
           <ChartCard title="Consultas por Setor" subtitle="Quantidade de consultas por setor">
-            <ResponsiveContainer width="100%" height={280}>
+            <ResponsiveContainer width="100%" height={340}>
               <BarChart data={CONSULTAS_POR_SETOR} margin={{ top: 5, right: 5, left: -15, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
                 <XAxis
@@ -158,7 +158,7 @@ export default function Dashboard() {
 
         <Grid item xs={12} md={4}>
           <ChartCard title="Atendimentos Gerais" subtitle="Distribuição geral">
-            <ResponsiveContainer width="100%" height={280}>
+            <ResponsiveContainer width="100%" height={340}>
               <PieChart>
                 <Pie
                   data={ATENDIMENTOS_GERAIS}
@@ -185,7 +185,7 @@ export default function Dashboard() {
 
         <Grid item xs={12} md={8}>
           <ChartCard title="Evolução Mensal" subtitle="Consultas, triagens e atendimentos por mês">
-            <ResponsiveContainer width="100%" height={280}>
+            <ResponsiveContainer width="100%" height={340}>
               <LineChart data={EVOLUCAO_MENSAL} margin={{ top: 5, right: 10, left: -15, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
                 <XAxis dataKey="mes" tick={{ fontSize: isMobile ? 10 : 12, fill: '#64748b' }} />
@@ -204,7 +204,7 @@ export default function Dashboard() {
 
         <Grid item xs={12} md={6}>
           <ChartCard title="Entradas vs Saídas" subtitle="Comparativo mensal de estoque">
-            <ResponsiveContainer width="100%" height={280}>
+            <ResponsiveContainer width="100%" height={340}>
               <BarChart data={ENTRADAS_SAIDAS} margin={{ top: 5, right: 10, left: -15, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
                 <XAxis dataKey="mes" tick={{ fontSize: isMobile ? 10 : 12, fill: '#64748b' }} />
@@ -222,7 +222,7 @@ export default function Dashboard() {
 
         <Grid item xs={12} md={6}>
           <ChartCard title="Produtos mais Utilizados" subtitle="Top produtos por uso">
-            <ResponsiveContainer width="100%" height={280}>
+            <ResponsiveContainer width="100%" height={340}>
               <BarChart
                 data={PRODUTOS_MAIS_USADOS}
                 layout="vertical"

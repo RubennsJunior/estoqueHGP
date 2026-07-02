@@ -1,36 +1,40 @@
+import { useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { Box, Drawer, useMediaQuery } from '@mui/material'
+import { LocalHospital } from '@mui/icons-material'
 import { setSidebarOpen } from '../../../store/slices/themeSlice'
-import { SIDEBAR_MENU } from '../../../constants'
-import { useWindowSize } from '../../../hooks/useWindowSize'
-import {
-  Box,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Drawer,
-  useMediaQuery,
-} from '@mui/material'
-import {
-  GridView,
-  Favorite,
-  LocalHospital,
-  MonitorHeart,
-  BarChart,
-  Settings,
-  Shield,
-} from '@mui/icons-material'
+import { MENU_CONFIG } from '../../../constants/menuConfig'
+import { SidebarMenuContext } from './SidebarMenuContext'
+import SidebarItem from './SidebarItem'
 
-const iconMap = {
-  BiGridAlt: GridView,
-  BiHeart: Favorite,
-  BiHealth: LocalHospital,
-  BiPulse: MonitorHeart,
-  BiBarChartAlt2: BarChart,
-  BiCog: Settings,
-  BiShield: Shield,
+const STORAGE_KEY = 'hgp_open_menu_ids'
+
+// Fecha os "irmãos" do mesmo nível ao abrir um item, mantendo apenas um ramo aberto por vez
+const computeToggledIds = (prev, menuId) => {
+  if (prev.includes(menuId)) {
+    return prev.filter((id) => !id.startsWith(menuId))
+  }
+  const parts = menuId.split('/')
+  const parentPrefix = parts.slice(0, -1).join('/')
+
+  const filtered = prev.filter((id) => {
+    const idParts = id.split('/')
+    const idParentPrefix = idParts.slice(0, -1).join('/')
+    if (idParentPrefix === parentPrefix && idParts.length === parts.length) {
+      return false
+    }
+    if (id.startsWith(parentPrefix + '/') && !id.startsWith(menuId + '/')) {
+      const afterParent = id.substring(parentPrefix ? parentPrefix.length + 1 : 0)
+      const firstSegment = afterParent.split('/')[0]
+      const targetFirstSegment = menuId.substring(parentPrefix ? parentPrefix.length + 1 : 0).split('/')[0]
+      if (firstSegment !== targetFirstSegment) {
+        return false
+      }
+    }
+    return true
+  })
+  return [...filtered, menuId]
 }
 
 export default function Sidebar() {
@@ -39,22 +43,60 @@ export default function Sidebar() {
   const dispatch = useDispatch()
   const open = useSelector((state) => state.theme.sidebarOpen)
   const isMobile = useMediaQuery('(max-width:768px)')
+  const drawerRef = useRef(null)
+
+  const [openMenuIds, setOpenMenuIds] = useState(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY)
+      return saved ? JSON.parse(saved) : []
+    } catch {
+      return []
+    }
+  })
+
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(openMenuIds))
+  }, [openMenuIds])
+
+  const toggleAccordion = (menuId) => {
+    setOpenMenuIds((prev) => computeToggledIds(prev, menuId))
+  }
 
   const handleNavigate = (path) => {
     navigate(path)
-    if (isMobile) {
+    dispatch(setSidebarOpen(false))
+    setOpenMenuIds([])
+  }
+
+  // Fecha o menu ao clicar fora dele (mas não ao clicar no próprio botão de abrir/fechar)
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!open) return
+      if (drawerRef.current && drawerRef.current.contains(event.target)) return
+      const toggleButton = document.querySelector('[data-sidebar-toggle]')
+      if (toggleButton && toggleButton.contains(event.target)) return
       dispatch(setSidebarOpen(false))
     }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [open, dispatch])
+
+  const menuContextValue = {
+    openMenuIds,
+    toggleAccordion,
+    activePath: location.pathname,
+    onNavigate: handleNavigate,
   }
 
   const sidebarContent = (
     <Box
+      ref={drawerRef}
       sx={{
         height: '100%',
+        width: 270,
         backgroundColor: '#0f172a',
         display: 'flex',
         flexDirection: 'column',
-        overflow: 'hidden',
       }}
     >
       <Box
@@ -62,9 +104,9 @@ export default function Sidebar() {
           height: 64,
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center',
-          borderBottom: '1px solid #1e293b',
           px: 2,
+          borderBottom: '1px solid #1e293b',
+          flexShrink: 0,
         }}
       >
         <Box
@@ -81,16 +123,7 @@ export default function Sidebar() {
         >
           <LocalHospital sx={{ color: '#fff', fontSize: 20 }} />
         </Box>
-        <Box
-          sx={{
-            ml: 1.5,
-            overflow: 'hidden',
-            whiteSpace: 'nowrap',
-            transition: 'opacity 0.3s ease',
-            opacity: open ? 1 : 0,
-            width: open ? 'auto' : 0,
-          }}
-        >
+        <Box sx={{ ml: 1.5, overflow: 'hidden' }}>
           <Box sx={{ color: '#fff', fontWeight: 700, fontSize: '1rem', lineHeight: 1.2 }}>
             HGP ERP
           </Box>
@@ -100,108 +133,35 @@ export default function Sidebar() {
         </Box>
       </Box>
 
-      <List sx={{ flex: 1, py: 1, px: 1 }}>
-        {SIDEBAR_MENU.map((item) => {
-          const Icon = iconMap[item.icon]
-          const isActive = location.pathname === item.path
+      <Box sx={{ flex: 1, overflowY: 'auto', py: 1.5, px: 1 }}>
+        <SidebarMenuContext.Provider value={menuContextValue}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.3 }}>
+            {MENU_CONFIG.map((item) => (
+              <SidebarItem key={item.id} item={item} />
+            ))}
+          </Box>
+        </SidebarMenuContext.Provider>
+      </Box>
 
-          return (
-            <ListItem key={item.id} disablePadding sx={{ display: 'block', mb: 0.3 }}>
-              <ListItemButton
-                onClick={() => handleNavigate(item.path)}
-                sx={{
-                  minHeight: 44,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 1.5,
-                  borderRadius: 1.5,
-                  backgroundColor: isActive ? '#1976d2' : 'transparent',
-                  color: isActive ? '#fff' : '#64748b',
-                  '&:hover': {
-                    backgroundColor: isActive ? '#1976d2' : '#1e293b',
-                    color: isActive ? '#fff' : '#cbd5e1',
-                  },
-                  transition: 'all 0.2s ease',
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    justifyContent: 'center',
-                    color: 'inherit',
-                    mr: open ? 1.5 : 'auto',
-                    fontSize: 20,
-                  }}
-                >
-                  <Icon sx={{ fontSize: 20 }} />
-                </ListItemIcon>
-                <ListItemText
-                  primary={item.label}
-                  sx={{
-                    opacity: open ? 1 : 0,
-                    whiteSpace: 'nowrap',
-                    '& .MuiListItemText-primary': {
-                      fontSize: '0.85rem',
-                      fontWeight: isActive ? 600 : 400,
-                    },
-                  }}
-                />
-              </ListItemButton>
-            </ListItem>
-          )
-        })}
-      </List>
-
-      <Box
-        sx={{
-          p: 2,
-          borderTop: '1px solid #1e293b',
-          opacity: open ? 1 : 0,
-          transition: 'opacity 0.3s ease',
-        }}
-      >
-        <Box sx={{ color: '#64748b', fontSize: '0.7rem', textAlign: 'center' }}>
-          v1.0.0
-        </Box>
+      <Box sx={{ p: 2, borderTop: '1px solid #1e293b' }}>
+        <Box sx={{ color: '#64748b', fontSize: '0.7rem', textAlign: 'center' }}>v1.0.0</Box>
       </Box>
     </Box>
   )
 
-  if (isMobile) {
-    return (
-      <Drawer
-        variant="temporary"
-        open={open}
-        onClose={() => dispatch(setSidebarOpen(false))}
-        ModalProps={{ keepMounted: true }}
-        sx={{
-          '& .MuiDrawer-paper': {
-            width: 260,
-            boxSizing: 'border-box',
-            border: 'none',
-          },
-        }}
-      >
-        {sidebarContent}
-      </Drawer>
-    )
-  }
-
   return (
     <Drawer
-      variant="permanent"
+      variant={isMobile ? 'temporary' : 'persistent'}
       anchor="left"
       open={open}
+      onClose={() => dispatch(setSidebarOpen(false))}
+      ModalProps={{ keepMounted: true }}
       sx={{
-        width: open ? 260 : 70,
-        flexShrink: 0,
-        whiteSpace: 'nowrap',
         '& .MuiDrawer-paper': {
-          width: open ? 260 : 70,
-          transition: 'width 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-          overflow: 'hidden',
+          width: 270,
+          boxSizing: 'border-box',
           border: 'none',
-          borderRight: '1px solid #1e293b',
-          backgroundColor: '#0f172a',
+          borderRight: isMobile ? 'none' : '1px solid #1e293b',
         },
       }}
     >

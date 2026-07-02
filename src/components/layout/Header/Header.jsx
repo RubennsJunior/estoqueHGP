@@ -77,13 +77,14 @@ export default function Header() {
           height: 64,
           zIndex: 1201,
           transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-          left: isMobile ? 0 : (sidebarOpen ? '260px' : '70px'),
-          width: isMobile ? '100%' : `calc(100% - ${sidebarOpen ? '260px' : '70px'})`,
+          left: isMobile ? 0 : (sidebarOpen ? '270px' : 0),
+          width: isMobile ? '100%' : `calc(100% - ${sidebarOpen ? '270px' : '0px'})`,
         }}
       >
         <Toolbar sx={{ height: 64, minHeight: '64px !important', px: 2 }}>
           <IconButton
             onClick={() => dispatch(toggleSidebar())}
+            data-sidebar-toggle
             sx={{ color: '#475569', mr: 1 }}
           >
             <MenuIcon />

@@ -17,7 +17,7 @@ export default function Layout({ children }) {
           display: 'flex',
           flexDirection: 'column',
           transition: 'margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-          ml: isMobile ? 0 : (sidebarOpen ? '260px' : '70px'),
+          ml: isMobile ? 0 : (sidebarOpen ? '270px' : 0),
         }}
       >
         <Header />
