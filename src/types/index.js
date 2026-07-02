@@ -1,0 +1,33 @@
+export const PERFIS = {
+  ADMIN: 'Administrador',
+  MEDICO: 'Médico',
+  ENFERMEIRO: 'Enfermeiro',
+  FARMACEUTICO: 'Farmacêutico',
+  ESTOQUISTA: 'Estoquista',
+  FINANCEIRO: 'Financeiro',
+}
+
+export const PERMISSOES = {
+  DASHBOARD_VIEW: 'dashboard_view',
+  HEMODINAMICA_VIEW: 'hemodinamica_view',
+  HEMODINAMICA_CREATE: 'hemodinamica_create',
+  HEMODINAMICA_EDIT: 'hemodinamica_edit',
+  HEMODINAMICA_DELETE: 'hemodinamica_delete',
+  CENTRO_CIRURGICO_VIEW: 'centro_cirurgico_view',
+  CENTRO_CIRURGICO_CREATE: 'centro_cirurgico_create',
+  CENTRO_CIRURGICO_EDIT: 'centro_cirurgico_edit',
+  CENTRO_CIRURGICO_DELETE: 'centro_cirurgico_delete',
+  OPME_VIEW: 'opme_view',
+  OPME_CREATE: 'opme_create',
+  OPME_EDIT: 'opme_edit',
+  OPME_DELETE: 'opme_delete',
+  RELATORIOS_VIEW: 'relatorios_view',
+  RELATORIOS_EXPORT: 'relatorios_export',
+  GESTAO_VIEW: 'gestao_view',
+  SISTEMA_VIEW: 'sistema_view',
+  SISTEMA_ADMIN: 'sistema_admin',
+  USUARIOS_VIEW: 'usuarios_view',
+  USUARIOS_CREATE: 'usuarios_create',
+  USUARIOS_EDIT: 'usuarios_edit',
+  USUARIOS_DELETE: 'usuarios_delete',
+}
