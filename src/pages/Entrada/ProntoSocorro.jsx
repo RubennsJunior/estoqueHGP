@@ -206,16 +206,16 @@ export default function ProntoSocorro() {
 
       {!showForm && (
         <Grid container spacing={2.5} sx={{ mb: 4 }}>
-          <Grid item xs={12} sm={6} lg={3}>
+          <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
             <DashboardCard title="Triados Hoje" value={stats.total} icon={PlaylistAdd} color="#1976d2" bgColor="#e3f2fd" />
           </Grid>
-          <Grid item xs={12} sm={6} lg={3}>
+          <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
             <DashboardCard title="Aguardando Setor" value={stats.aguardando} icon={PersonOutlined} color="#ff9800" bgColor="#fff3e0" />
           </Grid>
-          <Grid item xs={12} sm={6} lg={3}>
+          <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
             <DashboardCard title="Encaminhados" value={stats.encaminhados} icon={HowToReg} color="#4caf50" bgColor="#e8f5e9" />
           </Grid>
-          <Grid item xs={12} sm={6} lg={3}>
+          <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
             <DashboardCard title="Casos Críticos" value={stats.criticos} icon={WarningAmber} color="#f44336" bgColor="#ffebee" />
           </Grid>
         </Grid>
@@ -236,19 +236,19 @@ export default function ProntoSocorro() {
           <Box component="form" onSubmit={handleSalvarTriagem} sx={{ p: 3, display: 'flex', flexDirection: 'column', gap: 4 }}>
             <FormSection title="1. Identificação do Paciente">
               <Grid container spacing={2.5}>
-                <Grid item xs={12} md={4}>
+                <Grid size={{ xs: 12, md: 4 }}>
                   <TextField label="Nome Completo *" fullWidth size="small" value={form.nome} onChange={(e) => set('nome', e.target.value)} />
                 </Grid>
-                <Grid item xs={12} md={4}>
+                <Grid size={{ xs: 12, md: 4 }}>
                   <TextField label="CPF" fullWidth size="small" placeholder="000.000.000-00" value={form.cpf} onChange={(e) => set('cpf', e.target.value)} />
                 </Grid>
-                <Grid item xs={12} md={4}>
+                <Grid size={{ xs: 12, md: 4 }}>
                   <TextField label="Data de Nascimento" type="date" fullWidth size="small" value={form.nascimento} onChange={(e) => set('nascimento', e.target.value)} InputLabelProps={{ shrink: true }} />
                 </Grid>
-                <Grid item xs={12} md={4}>
+                <Grid size={{ xs: 12, md: 4 }}>
                   <TextField label="Telefone de Contato" fullWidth size="small" value={form.telefone} onChange={(e) => set('telefone', e.target.value)} />
                 </Grid>
-                <Grid item xs={12} md={8}>
+                <Grid size={{ xs: 12, md: 8 }}>
                   <TextField label="Nome da Mãe" fullWidth size="small" value={form.nomeMae} onChange={(e) => set('nomeMae', e.target.value)} />
                 </Grid>
               </Grid>
@@ -265,13 +265,13 @@ export default function ProntoSocorro() {
             >
               {form.temDependente && (
                 <Grid container spacing={2.5}>
-                  <Grid item xs={12} md={4}>
+                  <Grid size={{ xs: 12, md: 4 }}>
                     <TextField label="Nome do Acompanhante" fullWidth size="small" value={form.nomeDependente} onChange={(e) => set('nomeDependente', e.target.value)} />
                   </Grid>
-                  <Grid item xs={12} md={4}>
+                  <Grid size={{ xs: 12, md: 4 }}>
                     <TextField label="Grau de Parentesco" fullWidth size="small" value={form.parentesco} onChange={(e) => set('parentesco', e.target.value)} />
                   </Grid>
-                  <Grid item xs={12} md={4}>
+                  <Grid size={{ xs: 12, md: 4 }}>
                     <TextField label="Telefone do Acompanhante" fullWidth size="small" value={form.telDependente} onChange={(e) => set('telDependente', e.target.value)} />
                   </Grid>
                 </Grid>
@@ -280,7 +280,7 @@ export default function ProntoSocorro() {
 
             <FormSection title="3. Dados Clínicos e Queixa Principal">
               <Grid container spacing={2.5}>
-                <Grid item xs={12}>
+                <Grid size={{ xs: 12 }}>
                   <TextField
                     label="Queixa Principal / O que está sentindo *"
                     fullWidth
@@ -291,16 +291,16 @@ export default function ProntoSocorro() {
                     onChange={(e) => set('queixa', e.target.value)}
                   />
                 </Grid>
-                <Grid item xs={12} sm={6} md={3}>
+                <Grid size={{ xs: 12, sm: 6, md: 3 }}>
                   <TextField label="Pressão Arterial (PA)" fullWidth size="small" placeholder="Ex: 120/80" value={form.pa} onChange={(e) => set('pa', e.target.value)} />
                 </Grid>
-                <Grid item xs={12} sm={6} md={3}>
+                <Grid size={{ xs: 12, sm: 6, md: 3 }}>
                   <TextField label="Frequência Cardíaca (FC)" type="number" fullWidth size="small" value={form.fc} onChange={(e) => set('fc', e.target.value)} />
                 </Grid>
-                <Grid item xs={12} sm={6} md={3}>
+                <Grid size={{ xs: 12, sm: 6, md: 3 }}>
                   <TextField label="Temperatura" fullWidth size="small" placeholder="Ex: 36.5" value={form.temp} onChange={(e) => set('temp', e.target.value)} />
                 </Grid>
-                <Grid item xs={12} sm={6} md={3}>
+                <Grid size={{ xs: 12, sm: 6, md: 3 }}>
                   <TextField label="Saturação de O2 (%)" type="number" fullWidth size="small" value={form.sat} onChange={(e) => set('sat', e.target.value)} />
                 </Grid>
               </Grid>
@@ -311,7 +311,7 @@ export default function ProntoSocorro() {
                 {PRIORIDADES_MANCHESTER.map((p) => {
                   const isSelected = form.prioridadeId === p.id
                   return (
-                    <Grid item xs={12} sm={6} md={4} lg={2.4} key={p.id}>
+                    <Grid size={{ xs: 12, sm: 6, md: 4, lg: 2.4 }} key={p.id}>
                       <Box
                         component="button"
                         type="button"
@@ -347,7 +347,7 @@ export default function ProntoSocorro() {
 
             <FormSection title="5. Destino de Encaminhamento">
               <Grid container spacing={2.5}>
-                <Grid item xs={12} md={6}>
+                <Grid size={{ xs: 12, md: 6 }}>
                   <TextField select label="Setor de Destino *" fullWidth size="small" value={form.destinoId} onChange={(e) => set('destinoId', e.target.value)}>
                     {SETORES_DESTINO.map((s) => (
                       <MenuItem key={s.id} value={s.id}>{s.nome}</MenuItem>

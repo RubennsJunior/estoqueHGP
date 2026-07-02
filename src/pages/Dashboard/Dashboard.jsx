@@ -106,7 +106,7 @@ export default function Dashboard() {
         {cardConfig.map((card) => {
           const colors = CORES_CARDS[card.key]
           return (
-            <Grid item xs={12} sm={6} md={3} key={card.key}>
+            <Grid size={{ xs: 12, sm: 6, md: 3 }} key={card.key}>
               <DashboardCard
                 title={card.title}
                 value={stats?.[card.key]}
@@ -120,7 +120,7 @@ export default function Dashboard() {
       </Grid>
 
       <Grid container spacing={2.5}>
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <ChartCard title="Triagens por Setor" subtitle="Quantidade de triagens por setor">
             <ResponsiveContainer width="100%" height={340}>
               <BarChart data={TRIAGENS_POR_SETOR} margin={{ top: 5, right: 5, left: -15, bottom: 5 }}>
@@ -138,7 +138,7 @@ export default function Dashboard() {
           </ChartCard>
         </Grid>
 
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <ChartCard title="Consultas por Setor" subtitle="Quantidade de consultas por setor">
             <ResponsiveContainer width="100%" height={340}>
               <BarChart data={CONSULTAS_POR_SETOR} margin={{ top: 5, right: 5, left: -15, bottom: 5 }}>
@@ -156,7 +156,7 @@ export default function Dashboard() {
           </ChartCard>
         </Grid>
 
-        <Grid item xs={12} md={4}>
+        <Grid size={{ xs: 12, md: 4 }}>
           <ChartCard title="Atendimentos Gerais" subtitle="Distribuição geral">
             <ResponsiveContainer width="100%" height={340}>
               <PieChart>
@@ -183,7 +183,7 @@ export default function Dashboard() {
           </ChartCard>
         </Grid>
 
-        <Grid item xs={12} md={8}>
+        <Grid size={{ xs: 12, md: 8 }}>
           <ChartCard title="Evolução Mensal" subtitle="Consultas, triagens e atendimentos por mês">
             <ResponsiveContainer width="100%" height={340}>
               <LineChart data={EVOLUCAO_MENSAL} margin={{ top: 5, right: 10, left: -15, bottom: 5 }}>
@@ -202,7 +202,7 @@ export default function Dashboard() {
           </ChartCard>
         </Grid>
 
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <ChartCard title="Entradas vs Saídas" subtitle="Comparativo mensal de estoque">
             <ResponsiveContainer width="100%" height={340}>
               <BarChart data={ENTRADAS_SAIDAS} margin={{ top: 5, right: 10, left: -15, bottom: 5 }}>
@@ -220,7 +220,7 @@ export default function Dashboard() {
           </ChartCard>
         </Grid>
 
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <ChartCard title="Produtos mais Utilizados" subtitle="Top produtos por uso">
             <ResponsiveContainer width="100%" height={340}>
               <BarChart

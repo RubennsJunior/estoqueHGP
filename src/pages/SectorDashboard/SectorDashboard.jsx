@@ -69,7 +69,7 @@ export default function SectorDashboard() {
           const child = sector.children[i % sector.children.length]
           const colors = STAT_COLORS[i]
           return (
-            <Grid item xs={12} sm={6} md={3} key={stat.label}>
+            <Grid size={{ xs: 12, sm: 6, md: 3 }} key={stat.label}>
               <DashboardCard
                 title={stat.label}
                 value={stat.value}
@@ -89,7 +89,7 @@ export default function SectorDashboard() {
         {sector.children.map((child) => {
           const ChildIcon = getMenuIcon(child.icon)
           return (
-            <Grid item xs={12} sm={6} md={4} lg={3} key={child.id}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={child.id}>
               <Box
                 component="button"
                 onClick={() => navigate(child.route)}

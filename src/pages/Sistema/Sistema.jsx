@@ -53,7 +53,7 @@ export default function Sistema() {
         {modules.map((mod) => {
           const Icon = mod.icon
           return (
-            <Grid item xs={12} sm={6} md={4} lg={3} key={mod.id}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={mod.id}>
               <Card
                 sx={{
                   cursor: 'pointer',
@@ -94,7 +94,7 @@ export default function Sistema() {
           )
         })}
 
-        <Grid item xs={12} md={7}>
+        <Grid size={{ xs: 12, md: 7 }}>
           <Card>
             <CardContent sx={{ p: 3 }}>
               <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 2, color: '#1e293b' }}>
@@ -122,7 +122,7 @@ export default function Sistema() {
           </Card>
         </Grid>
 
-        <Grid item xs={12} md={5}>
+        <Grid size={{ xs: 12, md: 5 }}>
           <Card>
             <CardContent sx={{ p: 3 }}>
               <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 2, color: '#1e293b' }}>

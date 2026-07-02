@@ -51,7 +51,7 @@ export default function Relatorios() {
       <PageTitle title="Relatórios" subtitle="Geração e exportação de relatórios" />
 
       <Grid container spacing={3}>
-        <Grid item xs={12} md={8}>
+        <Grid size={{ xs: 12, md: 8 }}>
           <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 2, color: '#1e293b' }}>
             Tipos de Relatório
           </Typography>
@@ -59,7 +59,7 @@ export default function Relatorios() {
             {reportTypes.map((report) => {
               const Icon = report.icon
               return (
-                <Grid item xs={12} sm={6} key={report.id}>
+                <Grid size={{ xs: 12, sm: 6 }} key={report.id}>
                   <Card
                     sx={{
                       cursor: 'pointer',
@@ -102,7 +102,7 @@ export default function Relatorios() {
           </Grid>
         </Grid>
 
-        <Grid item xs={12} md={4}>
+        <Grid size={{ xs: 12, md: 4 }}>
           <Card sx={{ p: 2.5 }}>
             <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 2.5, color: '#1e293b' }}>
               Filtros

@@ -219,13 +219,13 @@ export default function Portaria() {
           {!showVisitorForm && (
             <>
               <Grid container spacing={2.5} sx={{ mb: 3 }}>
-                <Grid item xs={12} sm={4}>
+                <Grid size={{ xs: 12, sm: 4 }}>
                   <DashboardCard title="Visitantes no Prédio" value={vStats.dentro} icon={Groups} color="#1976d2" bgColor="#e3f2fd" />
                 </Grid>
-                <Grid item xs={12} sm={4}>
+                <Grid size={{ xs: 12, sm: 4 }}>
                   <DashboardCard title="Visitas Concluídas" value={vStats.saidas} icon={HowToReg} color="#4caf50" bgColor="#e8f5e9" />
                 </Grid>
-                <Grid item xs={12} sm={4}>
+                <Grid size={{ xs: 12, sm: 4 }}>
                   <DashboardCard title="Total de Visitas Hoje" value={vStats.totalHoje} icon={Groups} color="#00acc1" bgColor="#e0f7fa" />
                 </Grid>
               </Grid>
@@ -253,22 +253,22 @@ export default function Portaria() {
               </Box>
               <Box component="form" onSubmit={handleSalvarVisitante} sx={{ p: 3 }}>
                 <Grid container spacing={2.5}>
-                  <Grid item xs={12} md={4}>
+                  <Grid size={{ xs: 12, md: 4 }}>
                     <TextField label="Nome Completo do Visitante *" fullWidth size="small" value={visitorForm.nome} onChange={(e) => setVisitorForm((p) => ({ ...p, nome: e.target.value }))} />
                   </Grid>
-                  <Grid item xs={12} md={4}>
+                  <Grid size={{ xs: 12, md: 4 }}>
                     <TextField label="Documento (RG ou CPF)" fullWidth size="small" value={visitorForm.doc} onChange={(e) => setVisitorForm((p) => ({ ...p, doc: e.target.value }))} />
                   </Grid>
-                  <Grid item xs={12} md={4}>
+                  <Grid size={{ xs: 12, md: 4 }}>
                     <TextField label="Número do Crachá" fullWidth size="small" value={visitorForm.cracha} onChange={(e) => setVisitorForm((p) => ({ ...p, cracha: e.target.value }))} />
                   </Grid>
-                  <Grid item xs={12} md={4}>
+                  <Grid size={{ xs: 12, md: 4 }}>
                     <TextField label="Paciente Visitado *" fullWidth size="small" value={visitorForm.paciente} onChange={(e) => setVisitorForm((p) => ({ ...p, paciente: e.target.value }))} />
                   </Grid>
-                  <Grid item xs={12} md={4}>
+                  <Grid size={{ xs: 12, md: 4 }}>
                     <TextField label="Leito / Quarto" fullWidth size="small" value={visitorForm.leito} onChange={(e) => setVisitorForm((p) => ({ ...p, leito: e.target.value }))} />
                   </Grid>
-                  <Grid item xs={12} md={4}>
+                  <Grid size={{ xs: 12, md: 4 }}>
                     <TextField label="Grau de Parentesco / Relação" fullWidth size="small" value={visitorForm.parentesco} onChange={(e) => setVisitorForm((p) => ({ ...p, parentesco: e.target.value }))} />
                   </Grid>
                 </Grid>
@@ -345,13 +345,13 @@ export default function Portaria() {
           {!showEmployeeForm && (
             <>
               <Grid container spacing={2.5} sx={{ mb: 3 }}>
-                <Grid item xs={12} sm={4}>
+                <Grid size={{ xs: 12, sm: 4 }}>
                   <DashboardCard title="Entradas Registradas" value={fStats.entradas} icon={HowToReg} color="#4caf50" bgColor="#e8f5e9" />
                 </Grid>
-                <Grid item xs={12} sm={4}>
+                <Grid size={{ xs: 12, sm: 4 }}>
                   <DashboardCard title="Saídas Registradas" value={fStats.saidas} icon={LogoutIcon} color="#ff9800" bgColor="#fff3e0" />
                 </Grid>
-                <Grid item xs={12} sm={4}>
+                <Grid size={{ xs: 12, sm: 4 }}>
                   <DashboardCard title="Total Movimentações" value={fStats.total} icon={PlaylistAdd} color="#1976d2" bgColor="#e3f2fd" />
                 </Grid>
               </Grid>
@@ -379,16 +379,16 @@ export default function Portaria() {
               </Box>
               <Box component="form" onSubmit={handleSalvarAcesso} sx={{ p: 3 }}>
                 <Grid container spacing={2.5}>
-                  <Grid item xs={12} md={4}>
+                  <Grid size={{ xs: 12, md: 4 }}>
                     <TextField label="Matrícula *" fullWidth size="small" value={employeeForm.matricula} onChange={(e) => setEmployeeForm((p) => ({ ...p, matricula: e.target.value }))} />
                   </Grid>
-                  <Grid item xs={12} md={4}>
+                  <Grid size={{ xs: 12, md: 4 }}>
                     <TextField label="Nome Completo *" fullWidth size="small" value={employeeForm.nome} onChange={(e) => setEmployeeForm((p) => ({ ...p, nome: e.target.value }))} />
                   </Grid>
-                  <Grid item xs={12} md={4}>
+                  <Grid size={{ xs: 12, md: 4 }}>
                     <TextField label="Cargo" fullWidth size="small" value={employeeForm.cargo} onChange={(e) => setEmployeeForm((p) => ({ ...p, cargo: e.target.value }))} />
                   </Grid>
-                  <Grid item xs={12} md={4}>
+                  <Grid size={{ xs: 12, md: 4 }}>
                     <Typography variant="body2" sx={{ mb: 1, fontWeight: 500 }}>Tipo de Registro *</Typography>
                     <ToggleButtonGroup
                       value={employeeForm.tipo}
@@ -401,14 +401,14 @@ export default function Portaria() {
                       <ToggleButton value="Saída" sx={{ textTransform: 'none' }}>Saída (Check-out)</ToggleButton>
                     </ToggleButtonGroup>
                   </Grid>
-                  <Grid item xs={12} md={4}>
+                  <Grid size={{ xs: 12, md: 4 }}>
                     <TextField select label="Setor de Atuação" fullWidth size="small" value={employeeForm.setor} onChange={(e) => setEmployeeForm((p) => ({ ...p, setor: e.target.value }))}>
                       {SETORES.map((s) => (
                         <MenuItem key={s} value={s}>{s}</MenuItem>
                       ))}
                     </TextField>
                   </Grid>
-                  <Grid item xs={12}>
+                  <Grid size={{ xs: 12 }}>
                     <TextField label="Observações / Justificativa" fullWidth size="small" value={employeeForm.obs} onChange={(e) => setEmployeeForm((p) => ({ ...p, obs: e.target.value }))} />
                   </Grid>
                 </Grid>

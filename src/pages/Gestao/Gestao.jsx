@@ -33,7 +33,7 @@ export default function Gestao() {
         {modules.map((mod) => {
           const Icon = mod.icon
           return (
-            <Grid item xs={12} sm={6} md={4} lg={3} key={mod.id}>
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={mod.id}>
               <Card
                 sx={{
                   cursor: 'pointer',
